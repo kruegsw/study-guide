@@ -1,0 +1,50 @@
+<%= networking_fundamentals_scheme_data_sql = erb :template_modular_accordian,
+		locals: {
+			button: "Scheme, Data, and SQL",
+			heading: "Scheme, Data, and SQL",
+			content: "<h3>The SQL Language</h3>
+
+<p>SQL (Structured Query Language) is a standard language for managing and manipulating relational databases. SQL commands allow you to create, modify, and query databases. The key SQL commands include SELECT, INSERT, UPDATE, DELETE, and CREATE, among others.</p>
+
+<h3>PostgreSQL Data Types</h3>
+
+<p>PostgreSQL supports various data types, which specify the kind of data that can be stored in a particular column of a table. These include numeric types (integer, decimal), character types (char, varchar, text), Boolean, date/time types (date, time), and more complex types like arrays and JSON.</p>
+
+<h3>Working with a Single Table</h3>
+
+<p>This involves running queries on a single database table. Common operations include selecting data (using SELECT), inserting new rows (INSERT), updating existing rows (UPDATE), and deleting rows (DELETE).</p>
+
+<h3>Loading Database Dumps</h3>
+
+<p>Database dumps are a kind of backup that can be used to save and restore data. They can be loaded into a database using specific commands in PostgreSQL. The pg_dump command can be used to create a dump, and pg_restore or psql can be used to load data from the dump.</p>
+
+<h3>More Single Table Queries</h3>
+
+<p>This expands on using SELECT queries to extract more complex data from a single table, using clauses like WHERE (for conditional querying), ORDER BY (for sorting), and LIMIT (to restrict the number of rows returned).</p>
+
+<h3>NOT NULL and Default Values</h3>
+
+<p>The NOT NULL constraint in PostgreSQL enforces a field to always contain a value. This means that you cannot insert NULL into a NOT NULL column. Default values are set using the DEFAULT keyword, specifying a value to be used if no value is explicitly supplied during an INSERT operation.</p>
+
+<h3>More Constraints</h3>
+
+<p>Beyond NOT NULL, other constraints include UNIQUE (ensure unique values for a column), PRIMARY KEY (a unique identifier for a row), FOREIGN KEY (reference to a primary key in another table), and CHECK (ensure column values meet a specific condition).</p>
+
+<h3>Using Keys</h3>
+
+<p>Keys in databases are used to identify and establish relationships between tables. Primary keys uniquely identify each record in a table, while foreign keys link records in two tables.</p>
+
+<h3>GROUP BY and Aggregate Functions</h3>
+
+<p>The GROUP BY statement groups rows with the same values in specified columns into aggregated data. Aggregate functions like COUNT, SUM, AVG, MAX, MIN are used with GROUP BY to perform operations on grouped data.</p>
+
+<h3>How PostgreSQL Executes Queries</h3>
+
+<p>PostgreSQL uses a query planner and an executor to run SQL queries. When a query is submitted, the planner decides the most efficient way to execute it, based on statistics about the data. The executor then carries out the plan.</p>
+
+<h3>Table and Column Aliases</h3>
+
+<p>Aliases are temporary names given to tables or columns for the purpose of a particular SQL query. They can make queries easier to write and read. In PostgreSQL, you can define an alias using the AS keyword or simply by specifying the alias directly after the column or table name.</p>",
+			nested: ""
+		}
+%>

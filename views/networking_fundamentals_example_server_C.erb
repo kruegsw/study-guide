@@ -1,0 +1,70 @@
+
+<div>
+	<p>In this example, we're using the C programming language and system calls to create a socket, configure the server address, connect to the server, send and receive data, and finally close the socket. The code demonstrates the low-level control and interaction with the networking stack provided by C and system calls. It requires an understanding of socket programming concepts and the underlying networking protocols.</p>
+
+	<%
+	markdown_text_c = <<~TEXT
+	#include &lt;stdio.h&gt;
+	#include &lt;sys/socket.h&gt;
+	#include &lt;netinet/in.h&gt;
+	#include &lt;arpa/inet.h&gt;
+
+	int main() {
+	    int socket_fd;
+	    struct sockaddr_in server_addr;
+
+	    // Create a socket
+	    socket_fd = socket(AF_INET, SOCK_STREAM, 0);
+
+	    // Configure server address
+	    server_addr.sin_family = AF_INET;
+	    server_addr.sin_port = htons(8080);
+	    server_addr.sin_addr.s_addr = inet_addr("127.0.0.1");
+
+	    // Connect to the server
+	    connect(socket_fd, (struct sockaddr *)&server_addr, sizeof(server_addr));
+
+	    // Send data to the server
+	    char message[] = "Hello, server!";
+	    send(socket_fd, message, sizeof(message), 0);
+
+	    // Receive data from the server
+	    char buffer[1024];
+	    recv(socket_fd, buffer, sizeof(buffer), 0);
+	    printf("Received: %s\\n", buffer);
+
+	    // Close the socket
+	    close(socket_fd);
+
+	    return 0;
+	}
+	TEXT
+	%>
+	<pre><code class="language-c"><%= markdown_text_c %></code></pre>
+
+
+		<p>The C example above could be implemented in Ruby as follows:</p>
+
+	<%
+	markdown_text_ruby = <<~TEXT
+	require 'socket'
+
+	socket = TCPSocket.new('127.0.0.1', 8080)
+
+	# Send data to the server
+	message = 'Hello, server!'
+	socket.puts(message)
+
+	# Receive data from the server
+	response = socket.gets.chomp
+	puts "Received: \#{response}"
+
+	# Close the socket
+	socket.close
+	TEXT
+	%>
+
+	<pre><code class="language-ruby"><%= markdown_text_ruby %></code></pre>
+
+	<p>Ruby is a high-level programming language that abstracts many low-level details, providing a more concise and readable syntax. In the Ruby code, we utilize the built-in <code class="language-ruby">TCPSocket</code> class, which handles the underlying networking operations, such as socket creation, connection, sending, and receiving data. This abstraction allows us to focus on the essential parts of the networking logic without dealing with low-level system calls or memory management. The Ruby version provides a higher level of abstraction and simplicity, making it easier to write and understand networking code.</p>
+</div>

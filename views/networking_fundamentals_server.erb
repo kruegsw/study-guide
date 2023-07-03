@@ -1,0 +1,248 @@
+<%= assembly_and_machine_code = erb :template_modular_accordian,
+		locals: {
+			button: "1.  Assembly and Machine Code",
+			heading: "Assembly and Machine Code",
+			content: "<p>At the very lowest level, servers are just programs that run on a machine, and all programs ultimately get compiled down to machine code that the processor can execute. Similarly, assembly language is a slightly more readable representation of machine code, but it's still very low level and requires understanding the specifics of the processor architecture. For most humans, programming in assembly or machine code is not practical for anything but the simplest tasks.</p>",
+			nested: ""
+		}
+%>
+
+
+
+	<% networking_fundamentals_example_server_C = erb :networking_fundamentals_example_server_C %>
+	<% c_and_system_calls_example = erb :template_modular_accordian,
+			locals: {
+				button: "Example: Server  C and System Calls",
+				heading: "C and System Calls",
+				content: "",
+				nested: networking_fundamentals_example_server_C
+			}
+	%>
+
+<%= c_and_system_calls = erb :template_modular_accordian,
+		locals: {
+			button: "2.  C and System Calls",
+			heading: "C and System Calls",
+			content: "<p>C and System Calls: The next level up would be programming in a language like C and using system calls to interact with the operating system's networking stack. This provides a lot more abstraction than machine code -- for example, you can work with strings and arrays more easily, and the operating system handles a lot of the details of networking -- but it still requires a detailed understanding of how networks operate.</p>",
+			nested: c_and_system_calls_example
+		}
+%>
+
+				<% network_inerface_card_details_inspecting_traffic = erb :template_modular_accordian,
+						locals: {
+							button: "How can I inspect Network Interface Card (NIC) traffic?",
+							heading: "How can I inspect Network Interface Card (NIC) traffic?",
+							content: "<p>Under normal circumstances, with commonly available tools and software on most computers, you can start inspecting data when it reaches the operating system's networking stack, after the Network Interface Card (NIC) has accepted the packet and moved its data into the system's memory.
+
+								To inspect the data at this point, you can use built-in tools like:
+
+								On Unix-based systems (including Linux and macOS): Tools like <code>tcpdump</code>, <code>netstat</code>, <code>ss</code>, <code>lsof</code>, <code>iftop</code>, etc., can be used. For example, tcpdump is a powerful command-line packet analyzer that allows you to display TCP/IP and other packets being transmitted or received over a network.
+
+								On Windows: The <code>netstat</code> command can be used to display active network connections. Windows also has a built-in packet capture tool called Packet Monitor, formerly PacketMon, though it is less detailed than other external tools.
+
+								Remember, these tools are usually available on most systems but require some technical knowledge to use effectively. They also often need elevated privileges (such as root or administrator access), as they access low-level data about network traffic.
+
+								For more detailed analysis or for easier to use interfaces, you would typically need to install additional software, such as Wireshark, a popular network protocol analyzer that can provide a more user-friendly and detailed view of the data.</p>",
+							nested: ""
+						}
+				%>
+
+			<% network_inerface_card_details = erb :template_modular_accordian,
+					locals: {
+						button: "How does the Network Interface Card (NIC) handle incoming traffic?",
+						heading: "How does the Network Interface Card (NIC) handle incoming traffic?",
+						content: "<p>In context of a server application, the NIC plays a crucial role as it's the first point of contact for incoming network traffic to the machine. Here's a step-by-step process on how NIC handles incoming traffic:</p>
+
+							<p><b>Packet Arrival:</b> When an incoming data packet arrives over the network (e.g., via an Ethernet cable or WiFi), it first hits the NIC. Data at this point is typically in the form of electrical signals (for wired connections) or radio waves (for wireless connections).</p>
+
+							<p><b>Signal Conversion:</b> These signals are then converted into a binary format that the computer can understand. This happens in the physical layer of the OSI model of networking, which deals with the physical aspects of sending and receiving raw bits over a communication medium.</p>
+
+							<p><b>Packet Inspection:</b> After the binary conversion, the NIC checks the packet's header information, which contains various details about the packet, including the destination MAC address (Media Access Control address - a unique identifier assigned to the NIC).</p>
+
+							<p><b>MAC Address Check:</b> If the packet's destination MAC address matches the MAC address of the NIC (or if the packet is a broadcast or multicast packet that's intended for multiple devices), the NIC accepts the packet. Otherwise, it's discarded.</p>
+
+							<p><b>Data Transfer to RAM:</b> Once accepted, the packet data is then moved from the NIC to the system's Random Access Memory (RAM) for further processing. This operation is typically performed using Direct Memory Access (DMA), a method that allows hardware subsystems to access the system memory directly without involving the CPU, freeing up CPU resources for other tasks.</p>
+
+							<p><b>Interrupt the CPU:</b> After the data has been successfully transferred to the system memory, the NIC sends an interrupt signal to the CPU. This interrupt tells the CPU that the data is ready to be processed. The CPU then passes this data to the operating system's networking stack for further processing (like checking the IP and Port and forwarding the packet's data to the corresponding application).</p>
+
+							<p><b>Wait for Next Packet:</b> The NIC then goes back to waiting for the next incoming packet to start the process again.</p>
+
+							<p>This sequence of operations allows the NIC to efficiently handle network traffic, offloading a significant amount of work from the CPU, and enabling the computer to communicate effectively with the network.</p>",
+						nested: network_inerface_card_details_inspecting_traffic
+					}
+			%>
+
+		<% network_inerface_card = erb :template_modular_accordian,
+				locals: {
+					button: "1.  Network Interface Card (NIC)",
+					heading: "Network Interface Card (NIC)",
+					content: "<p>The physical hardware that first gets involved is the Network Interface Card (NIC), which is the hardware component that interfaces with your computer network. It receives packets of data from the network, which contain the destination IP and port number among other things. The NIC then passes these packets on to the computer's main processor.</p>",
+					nested: network_inerface_card_details
+				}
+		%>
+
+			<% operating_system_details = erb :template_modular_accordian,
+					locals: {
+						button: "How does the Operating System (OS) handle network communication?",
+						heading: "How does the Operating System (OS) handle network communication?",
+						content: "<p>The operating system, through its network stack, is responsible for managing all incoming and outgoing network communication. It's a complex system designed to handle a multitude of tasks related to networking. Let's break down its role in our scenario:</p>
+
+							<p><b>Packet Reception:</b> When a packet arrives from the NIC, the operating system is interrupted and it starts to process the packet. The packet is typically stored in a system buffer so it can be accessed by the network stack.</p>
+
+							<p><b>Decoding the Packet:</b> The network stack starts by decoding the packet's data. This process begins at the lowest layer of the network stack, the Link Layer (Layer 2 in the OSI model), where the MAC addresses (source and destination) are read.</p>
+
+							<p><b>Network Layer Processing:</b> The packet then proceeds up the stack to the Network Layer (Layer 3 in the OSI model). Here, the IP addresses are read and the OS determines whether the packet's destination IP address matches its own IP address or whether the packet is a broadcast packet intended for all devices on the network.</p>
+
+							<p><b>Transport Layer Processing:</b> If the packet is for the OS, it is passed to the Transport Layer (Layer 4 in the OSI model). This is where the TCP or UDP protocol is used, and the port number is read. The OS checks whether any programs are registered to receive packets on the packet's destination port number.</p>
+
+							<p><b>Passing to the Application:</b> If a program (like our server) is listening on the destination port, the OS passes the packet data to that program. This is typically done by making the data available and then notifying the program that new data has arrived, possibly by using a system call.</p>
+
+							<p><b>Waiting for More Packets:</b> After the packet has been processed, the OS returns to a state of waiting for the next interrupt from the NIC to signal that another packet has arrived.</p>
+
+							<p>The network stack in the operating system is a critical component in network communications. It is responsible for managing the decoding, routing, and processing of all network data that the system sends and receives. The stack handles a huge variety of tasks and works with numerous protocols, but in this instance, it's mainly concerned with TCP/IP and ensuring that packets reach the right application.</p>",
+						nested: ""
+					}
+			%>
+
+		<% operating_system = erb :template_modular_accordian,
+				locals: {
+					button: "2. Operating System (OS)",
+					heading: "Operating System (OS)",
+					content: "<p>The OS, equipped with its network stack, takes over from here. The network stack is a software component within the OS that handles network communication. The stack's responsibilities include packet routing, IP addressing, or handling TCP/UDP communication protocols.</p>",
+					nested: operating_system_details
+				}
+		%>
+
+			<% port_monitoring_details = erb :template_modular_accordian,
+					locals: {
+						button: "How does the Operating System (OS) know where to send the packet?",
+						heading: "How does the Operating System (OS) know where to send the packet?",
+						content: "<p>Ports are integral to network communications. They provide specific entry and exit points for data on devices. Each port has a unique number, ranging from 0 to 65535, and specific port numbers are often associated with certain types of network services or protocols. Here's a detailed breakdown of what happens during port monitoring:</p>
+
+              <p><b>Port Identification:</b> When the OS network stack gets a packet from the NIC, as described earlier, it decodes the packet and identifies the port number embedded in the packet header. This port number corresponds to the 'destination port,' which is the port on the receiving host where the data is being sent.</p>
+
+              <p><b>Port Listening Check:</b> The network stack then checks if any applications are 'listening' on that port. Listening, in this context, means that the application has told the OS it wants to receive any data that comes in on this port.</p>
+
+              <p><b>Process Association:</b> Each port can be associated with a specific process or application on the system. This is managed by the OS. An application tells the OS that it wants to listen for incoming connections on a particular port, and the OS keeps a table (sometimes called a socket table) to keep track of which applications are associated with which ports.</p>
+
+              <p><b>Port Matching:</b> If the packet's destination port matches the port that an application is listening on, the OS will route the packet to that application. If no application is listening on that port, the OS might send an ICMP 'destination unreachable' message back to the sender, depending on the circumstances.</p>
+
+              <p><b>Security Measures:</b> The OS also uses port numbers as a part of its security measures. For example, Unix-based systems restrict ports below 1024, known as well-known ports, to privileged services, meaning only root or processes with the necessary capabilities can bind to these ports. This is to prevent rogue applications from impersonating system services.</p>
+
+              <p>This process happens quickly and continuously, allowing the OS to handle many packets coming in and going out, efficiently directing traffic to the correct applications.</p>",
+						nested: ""
+					}
+			%>
+
+		<% port_monitoring = erb :template_modular_accordian,
+		    locals: {
+		        button: "3. Port Monitoring",
+		        heading: "Port Monitoring",
+		        content: "<p>If the packet's destination port matches the port that your server is listening on, the OS knows to forward that packet to your server application.</p>",
+		        nested: port_monitoring_details
+		    }
+		%>
+
+			<% data_transfer_to_application_details = erb :template_modular_accordian,
+					locals: {
+						button: "How does the Operating System (OS) transfer data to the application?",
+						heading: "How does the Operating System (OS) transfer data to the application?",
+						content: "<p><b>Data Transfer Initiation:</b> Once the operating system identifies that the packet's destination port matches the port on which our application is listening, it initiates the data transfer. This is not a literal movement of data, but rather a process of granting the application access to the specific memory location where the data resides.</p>
+
+              <p><b>Buffers and Memory:</b> The operating system utilizes a data structure known as a buffer, which is a region in the physical memory storage, to handle this process. The buffer acts as a temporary storage space for the data while it's being transferred from one place (the OS's network stack) to another (the application).</p>
+
+              <p><b>Buffer Management:</b> Buffers can be managed by the OS kernel (kernel space) or by the application itself (user space). In most cases, network data is initially placed into a kernel buffer. From here, the application can request to read the data, at which point it is copied from the kernel buffer to a buffer in user space.</p>
+
+              <p><b>Data Availability:</b> The application's buffer is where the data becomes available to the application for reading and processing. It's like a dedicated mailbox for the application, filled by the operating system, where the application can pick up its 'mail' (data) at its convenience.</p>
+
+              <p><b>Buffer Overflows and Underflows:</b> The size of buffers is finite, and this can sometimes lead to issues such as buffer overflows (when too much data is sent and the buffer runs out of space) or buffer underflows (when the data is being read from the buffer faster than it's being written). Proper buffer management techniques are important to prevent such issues.</p>
+
+              <p><b>Non-blocking I/O and Blocking I/O:</b> Depending on how the application is written, it may use blocking I/O or non-blocking I/O. With blocking I/O, the application will stop and wait if it tries to read and no data is available. With non-blocking I/O, the application can continue to do other things if no data is available when it tries to read.</p>
+
+              <p>This high-level transfer of data is how the operating system communicates with applications. It allows applications to receive and process data, respond to it, and send new data out to other systems. The operating system manages the lower-level details, allowing application developers to focus on what their applications need to do with the data, rather than how to get the data.</p>",
+						nested: ""
+					}
+			%>
+
+		<% data_transfer_to_application = erb :template_modular_accordian,
+		    locals: {
+		        button: "4. Data Transfer to Application",
+		        heading: "Data Transfer to Application",
+		        content: "<p>The OS transfers this packet's data to the server application by placing it into the server's buffer. The buffer is a region of the computer's physical memory storage used to temporarily store data while it is being moved from one place to another.</p>",
+		        nested: data_transfer_to_application_details
+		    }
+		%>
+
+			<% application_handling_details = erb :template_modular_accordian,
+					locals: {
+						button: "How does the server software process the data?",
+						heading: "How does the server software process the data?",
+						content: "<p><b>Data Retrieval:</b> Once the data has been transferred into the server's buffer, it's available for the application to retrieve and use. This typically involves system calls to read the data from the buffer. In our Ruby example, this could be the connection.read call.</p>
+
+              <p><b>Data Parsing:</b> After retrieving the data, the application needs to make sense of it. In the context of an HTTP server, for example, this involves parsing the HTTP request. Parsing is the process of analyzing a string of symbols, in this case the raw text of the HTTP request, according to the rules of a formal grammar, here the HTTP specification.</p>
+
+              <p><b>Request Handling:</b> After parsing the request, the server will use the parsed data to perform the necessary logic. This could involve anything from fetching data from a database, to running some computation, or just preparing a response.</p>
+
+              <p><b>Response Construction:</b> After the necessary logic has been executed, the server will construct a response to send back to the client. Again, in the context of an HTTP server, this involves building an HTTP response. This response will include a status code, possible headers, and the actual body of the response.</p>
+
+              <p><b>Data Sending:</b> Finally, the server sends the constructed response back to the client. This is another system call, like connection.write in our Ruby example. This call will take the data from the application and place it in a buffer, where it is then sent out over the network.</p>
+
+              <p><b>Connection Closing:</b> Once the response has been sent, the server may choose to close the connection. In our Ruby example, this is done with the connection.close call. This frees up resources associated with the connection. Some servers may keep the connection open if the client or the protocol used (like HTTP/2) supports multiple requests/responses per connection.</p>
+
+              <p>This process of data handling in the application can be complex and varies widely depending on the protocol used (like HTTP, FTP, etc.), the specific application logic, and how the server is designed to handle connections and responses. Nonetheless, the basic process of reading the data from the buffer, processing it, and sending a response remains fairly constant.</p>
+
+              <p>This 'listening' process is constantly happening in the background, allowing the server to accept and handle multiple requests concurrently or in quick succession.</p>
+
+              <p>The physical activity in the hardware mainly involves electrical signals passing through the circuitry to allow the communication and storage of binary data. It's important to note that 'listening' on a port doesn't mean that the CPU is constantly busy checking the port for activity. Rather, the CPU is interrupted by the network hardware when a packet for the port arrives. This kind of hardware interrupt-driven I/O is efficient and allows the CPU to work on other tasks when no network packets are arriving.</p>",
+						nested: ""
+					}
+			%>
+
+		<% application_handling = erb :template_modular_accordian,
+		    locals: {
+		        button: "5. Application Handling",
+		        heading: "Application Handling",
+		        content: "<p>Once the data is in the application's buffer, the server software can then process the data (e.g., parsing an HTTP request, executing the necessary logic, and building an HTTP response).</p>",
+		        nested: application_handling_details
+		    }
+		%>
+
+	<% how_do_sockets_listen = erb :template_modular_accordian,
+			locals: {
+				button: "How do sockets listen?",
+				heading: "How do sockets listen?",
+				content: "<p>When a server is set to \"listen\" on a certain port, it's essentially telling the operating system (OS) to monitor all the incoming traffic to that port and pass any relevant data to the server process.  Here is what happens in more detail:</p>",
+				nested: network_inerface_card+operating_system+port_monitoring+data_transfer_to_application+application_handling
+			}
+	%>
+
+<%= socket_libraries = erb :template_modular_accordian,
+		locals: {
+			button: "3.  Socket Libraries",
+			heading: "Socket Libraries",
+			content: "<p>Many languages, including C, provide libraries that abstract over the system calls to provide an easier-to-use interface for networking. These libraries typically provide functions or classes for creating sockets, binding them to ports, listening for connections, and sending and receiving data.</p>",
+			nested: how_do_sockets_listen
+		}
+%>
+
+
+
+<%= web_frameworks_and_libraries = erb :template_modular_accordian,
+		locals: {
+			button: "4.  Web Frameworks and Libraries",
+			heading: "Web Frameworks and Libraries",
+			content: "<p>On top of socket libraries, we often build higher-level libraries and frameworks that handle common tasks in web development. For example, a web framework might automatically parse HTTP requests and responses, route requests to the appropriate handler based on the URL, and provide utilities for generating HTML or JSON responses.</p>",
+			nested: ""
+		}
+%>
+
+
+
+<%= fully_featured_web_servers = erb :template_modular_accordian,
+		locals: {
+			button: "5.  Fully-Featured Web Servers",
+			heading: "Web Frameworks and Libraries",
+			content: "<p>At the highest level of abstraction, we have full-featured web servers like Apache, Nginx, or cloud-based solutions like AWS Lambda or Google Cloud Functions. These not only handle all of the details of networking, but also provide features like logging, load balancing, HTTPS, and more. You can often use these servers with just a few lines of configuration, without writing any code at all.</p>",
+			nested: ""
+		}
+%>

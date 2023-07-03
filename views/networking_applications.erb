@@ -1,0 +1,84 @@
+<% networking_applications_example_socket_ruby_raw = erb :networking_applications_example_socket_ruby_raw, layout: :template_content_with_markdown_prism %>
+<% networking_applications_example_socket_ruby_raw_accordian = erb :template_modular_accordian,
+	locals: {
+		button: "Server Example - \"Raw\" Socket in Ruby",
+		heading: "Server Example - \"Raw\" Socket in Ruby",
+		content: "",
+		nested: networking_applications_example_socket_ruby_raw
+	}
+%>
+
+<% networking_applications_example_server_ruby_lowest_abstraction = erb :networking_applications_example_server_ruby_lowest_abstraction, layout: :template_content_with_markdown_prism %>
+<% networking_applications_example_server_ruby_lowest_abstraction_accordian = erb :template_modular_accordian,
+	locals: {
+		button: "Server Example - Basic Server in Ruby with Less Abstraction",
+		heading: "Server Example - Basic Server in Ruby with Less Abstraction",
+		content: "",
+		nested: networking_applications_example_server_ruby_lowest_abstraction
+	}
+%>
+
+<% networking_applications_example_server_ruby_basic = erb :networking_applications_example_server_ruby_basic, layout: :template_content_with_markdown_prism %>
+<% networking_applications_example_server_ruby_basic_accordian = erb :template_modular_accordian,
+	locals: {
+		button: "Server Example - Basic Echo Server in Ruby",
+		heading: "Server Example - Basic Echo Server in Ruby",
+		content: "",
+		nested: networking_applications_example_server_ruby_basic
+	}
+%>
+
+<% networking_applications_example_server_ruby_with_http = erb :networking_applications_example_server_ruby_with_http, layout: :template_content_with_markdown_prism %>
+<% networking_applications_example_server_ruby_with_http_accordian = erb :template_modular_accordian,
+	locals: {
+		button: "Server Example - Basic HTTP Server in Ruby",
+		heading: "Server Example - Basic HTTP Server in Ruby",
+		content: "",
+		nested: networking_applications_example_server_ruby_with_http
+	}
+%>
+
+<% networking_applications_example_server_ruby_with_http_tbd = erb :networking_applications_example_server_ruby_with_http_tbd, layout: :template_content_with_markdown_prism %>
+<% networking_applications_example_server_ruby_with_http_tbd_accordian = erb :template_modular_accordian,
+	locals: {
+		button: "Server Example - TBD HTTP Server in Ruby",
+		heading: "Server Example - TBD HTTP Server in Ruby",
+		content: "",
+		nested: networking_applications_example_server_ruby_with_http_tbd
+	}
+%>
+
+<% networking_applications_example_server_WEBrick = erb :networking_applications_example_server_WEBrick, layout: :template_content_with_markdown_prism %>
+<% networking_applications_example_server_WEBrick_accordian = erb :template_modular_accordian,
+	locals: {
+		button: "Server Example - WEBrick Server in Ruby",
+		heading: "Server Example - WEBrick Server in Ruby",
+		content: "",
+		nested: networking_applications_example_server_WEBrick
+	}
+%>
+
+<% networking_applications_example_server_sinatra = erb :networking_applications_example_server_sinatra, layout: :template_content_with_markdown_prism %>
+<% networking_applications_example_server_sinatra_accordian = erb :template_modular_accordian,
+	locals: {
+		button: "Server Example - Sinatra Server in Ruby",
+		heading: "Server Example - Sinatra Server in Ruby",
+		content: "",
+		nested: networking_applications_example_server_sinatra
+	}
+%>
+
+<%= networking_applications = erb :template_modular_accordian,
+		locals: {
+			button: "Networking Applications",
+			heading: "Networking Applications",
+			content: "Computer networking is the practice of connecting computers and other devices to share resources and information. It involves the design, implementation, and management of networks that enable communication between devices across local and wide areas. Networking allows individuals and organizations to access the internet, share data, collaborate, and communicate efficiently.",
+			nested: networking_applications_example_socket_ruby_raw_accordian +
+				networking_applications_example_server_ruby_lowest_abstraction_accordian +
+				networking_applications_example_server_ruby_basic_accordian +
+				networking_applications_example_server_ruby_with_http_accordian +
+				networking_applications_example_server_ruby_with_http_tbd_accordian +
+				networking_applications_example_server_WEBrick_accordian +
+				networking_applications_example_server_sinatra_accordian
+		}
+%>

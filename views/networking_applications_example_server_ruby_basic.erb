@@ -1,0 +1,84 @@
+<div>
+  <p>It is possible to create a simple server using Ruby's standard library, thanks to classes like TCPServer and Socket. Here is a basic example of a server that listens for connections on port 1234 and echoes back anything it receives.</p>
+
+  <%
+  markdown_text = <<~TEXT
+  # frozen_string_literal: true
+
+  require 'socket'
+
+  server = TCPServer.new('localhost', 1234)
+  puts('Echo server listening on port 1234...')
+  
+  loop do
+    Thread.start(server.accept) do |client|
+      client.puts("I will echo back your message then close the connection.")
+      client_message = client.gets
+      client.puts("I have received your message: \#{client_message}")
+      client.close
+    end
+  end
+  TEXT
+  %>
+  <pre><code class="language-ruby"><%= markdown_text %></code></pre>
+
+  <p>This server uses <code class="language-ruby">Thread.start</code> to create a new thread for each client connection. This allows it to handle multiple simultaneous connections without blocking.</p>
+
+  <p>To test this code, open a terminal run the ruby code to start the server.</p>
+
+  <%
+  markdown_text = <<~TEXT.chomp
+  ruby server.rb 
+  Echo server listening on port 1234...
+  TEXT
+  %>
+  <pre class="command-line" data-user="user" data-host="localhost" data-output="2"><code class="language-command-line"><%= markdown_text %></code></pre>
+  
+  <p>Now that the server is listening, we will use telnet to simulate the client by establishing a command line session with the server.<p>
+  <p>Open a new terminal and issue the command <code class="language-command-line">telnet localhost 1234</code> where
+    <li><code class="language-command-line">telnet</code>: The command itself, invoking the Telnet client.</li>
+    <li><code class="language-command-line">localhost</code>: Refers to the loopback IP address (127.0.0.1) of the local machine, allowing you to connect to services running on your own computer.</li>
+    <li><code class="language-command-line">1234</code>: The port number to connect to. In this example, it's port 1234, but you can replace it with the appropriate port number you want to connect to.</li>
+  </p>
+    
+  <%
+  markdown_text = <<~TEXT.chomp
+  telnet localhost 1234
+  Trying 127.0.0.1...
+  Connected to localhost.
+  Escape character is '^]'.
+  I will echo back your message then close the connection.
+  TEXT
+  %>
+  <pre class="command-line" data-user="user" data-host="localhost" data-output="2-5"><code class="language-command-line"><%= markdown_text %></code></pre>
+  
+  <p>Check the terminal instance for your server.  You will now see.</p>
+  
+
+  <%
+  markdown_text = <<~TEXT.chomp
+  ruby server.rb 
+  Echo server listening on port 1234...
+  Connection established with client.
+  TEXT
+  %>
+  <pre class="command-line" data-user="user" data-host="localhost" data-output="2-3"><code class="language-command-line"><%= markdown_text %></code></pre>
+
+  <p>Now have the client send the server a message using the other terminal.</p>
+
+  <%
+  markdown_text = <<~TEXT.chomp
+  telnet localhost 1234
+  Trying 127.0.0.1...
+  Connected to localhost.
+  Escape character is '^]'.
+  I will echo back your message then close the connection.
+  Hello Server 
+  I have received your message: Hello Server
+  Connection closed by foreign host.
+  TEXT
+  %>
+  <pre class="command-line" data-user="user" data-host="localhost" data-output="2-5, 7-8" data-line="6-8"><code class="language-command-line"><%= markdown_text %></code></pre>
+
+  <p>As you can see, this server simply echos back any messages it receives, but you could replace this behavior with any kind of server logic you like. For example, you could create a basic HTTP server by reading HTTP requests and sending back HTTP responses.</p>
+</div>

@@ -1,0 +1,113 @@
+<style>
+    .card .collapse {
+      margin-right: 0;
+      padding-right: 0;
+      right: 0;
+    }
+</style>
+
+<% @tier_counter += 1 %>
+<% puts @tier_counter.to_s+heading %>
+<div class="accordion">
+  <div class="card">
+    <div class="card-header" id="heading<%= @tier_counter %>">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<%= @tier_counter %>" aria-expanded="false" aria-controls="collapse<%= @tier_counter %>">
+          <%= button %>
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapse<%= @tier_counter %>" class="collapse" aria-labelledby="heading">
+      <div class="card-body">
+        <h3><%= heading %></h3>
+        <p><%= content %></p>
+
+        <%= nested %>        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Tier 1
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <h3>Tier 1 Content</h3>
+        <p>Information for Tier 1 goes here.</p>
+        
+        <div class="accordion" id="accordionTier2">
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  Tier 2
+                </button>
+              </h2>
+            </div>
+
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionTier2">
+              <div class="card-body">
+                <h3>Tier 2 Content</h3>
+                <p>Information for Tier 2 goes here.</p>
+                
+                <div class="accordion" id="accordionTier3">
+                  <div class="card">
+                    <div class="card-header" id="headingThree">
+                      <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                          Tier 3
+                        </button>
+                      </h2>
+                    </div>
+
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionTier3">
+                      <div class="card-body">
+                        <h3>Tier 3 Content</h3>
+                        <p>Information for Tier 3 goes here.</p>
+                        
+                        <div class="accordion" id="accordionTier4">
+                          <div class="card">
+                            <div class="card-header" id="headingFour">
+                              <h2 class="mb-0">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                                  Tier 4
+                                </button>
+                              </h2>
+                            </div>
+                          
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionTier4">
+                              <div class="card-body">
+                                <h3>Tier 4 Content</h3>
+                                <p>Information for Tier 4 goes here.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+-->

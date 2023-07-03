@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Markdown Example</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Highlight.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <pre class="p-3 bg-light rounded shadow-sm">
+            <!-- Code block with syntax highlighting -->
+            <code class="language-ruby">
+                require 'sinatra'
+
+                set :bind, '0.0.0.0'  // This line is new!
+
+                BLOG_POSTS = [
+                    { id: 1, title: 'First post', body: 'This is my first post.' },
+                    { id: 2, title: 'Second post', body: 'This is my second post.' },
+                ]
+
+                get '/' do
+                    @posts = BLOG_POSTS
+                    erb :index
+                end
+            </code>
+        </pre>
+    </div>
+
+    <!-- Highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <!-- Highlight.js line numbers plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+    <!-- Clipboard.js -->
+    <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
+    <!-- Custom JavaScript to apply highlighting, line numbers, copy-to-clipboard and show detected language -->
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Apply syntax highlighting
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+
+            // Apply line numbers
+            document.querySelectorAll('code.hljs').forEach((code) => {
+                hljs.lineNumbersBlock(code);
+            });
+
+            // Copy-to-clipboard functionality
+            new Clipboard('.hljs', {
+                text: function(trigger) {
+                    return trigger.innerText;
+                }
+            });
+
+            // Show detected language
+            const codeBlock = document.querySelector('.hljs');
+            const preTag = codeBlock.parentNode;
+            const language = hljs.highlightAuto(codeBlock.innerText).language;
+            const languageLabel = document.createElement('span');
+            languageLabel.className = 'language-label';
+            languageLabel.innerText = language;
+            preTag.prepend(languageLabel);
+        });
+    </script>
+</body>
+</html>

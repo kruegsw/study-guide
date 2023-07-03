@@ -1,0 +1,12 @@
+
+
+<% networking_fundamentals_scheme_data_sql = erb :networking_fundamentals_scheme_data_sql %>
+
+<%= database_fundamentals = erb :template_modular_accordian,
+		locals: {
+			button: "Database Fundamentals",
+			heading: "Database Fundamentals",
+			content: "tbd",
+			nested: networking_fundamentals_scheme_data_sql
+		}
+%>

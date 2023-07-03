@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Guide v1</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Custom CSS for the responsive navigation bar */
+        .navbar {
+            display: none;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            overflow-y: auto;
+            background: #f8f9fa;
+            padding: 20px;
+        }
+
+        .sidebar .nav-link {
+            color: #343a40;
+        }
+
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link:focus {
+            color: #007bff;
+        }
+
+        .content {
+            margin-left: 200px;
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar {
+                display: block;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+        }
+    
+        .pre-tag {
+            p-3 bg-light rounded shadow-sm
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Study Guide</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#networkingCollapse">Networking Applications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#dbFoundationsCollapse">Database Foundations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#dbApplicationsCollapse">Database Applications</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 sidebar">
+                <div id="accordion">
+                    <!-- Back End -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#backendCollapse"
+                                    aria-expanded="true">
+                                    Back End
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="backendCollapse" class="collapse" data-parent="#accordion">
+                            <div class="card-body">
+                                <!-- Networking Applications -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse"
+                                                data-target="#networkingCollapse" aria-expanded="true">
+                                                Networking Applications
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="networkingCollapse" class="collapse" data-parent="#backendCollapse">
+                                        <div class="card-body">
+                                            <!-- Handling HTTP Requests -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link" data-toggle="collapse"
+                                                            data-target="#collapseOne" aria-expanded="true">
+                                                            Handling HTTP Requests
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseOne" class="collapse"
+                                                    data-parent="#networkingCollapse">
+                                                    <div class="card-body">
+                                                        <ul>
+                                                            <li><a class="nav-link" href="#" onclick="renderPage('sinatra-server-example.html')">Sinatra server example</a></li>
+                                                            <li>Understand what an echo server is and how to create
+                                                                one.</li>
+                                                            <li>Practice parsing paths and parameters from HTTP
+                                                                requests.</li>
+                                                            <li>Learn how to send a complete HTTP response, including
+                                                                headers and body.</li>
+                                                            <li>Understand how to handle empty HTTP requests.</li>
+                                                            <li>Practice persisting state in the URL.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Project: Build a Book Reading App -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link collapsed"
+                                                            data-toggle="collapse" data-target="#collapseTwo"
+                                                            aria-expanded="false">
+                                                            Project: Build a Book Reading App
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseTwo" class="collapse"
+                                                    data-parent="#networkingCollapse">
+                                                    <div class="card-body">
+                                                        <ul>
+                                                            <li>Learn how routes work in a web framework.</li>
+                                                            <li>Practice rendering templates.</li>
+                                                            <li>Understand the purpose of a layout and how it can
+                                                                reduce duplication in your templates.</li>
+                                                            <li>Learn how to work with route parameters and filters.</li>
+                                                            <li>Understand the concept of view helpers and their uses.</li>
+                                                            <li>Practice redirecting users from one page to another.</li>
+                                                            <li>Implement a search form.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Project: Build a Todo List -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link collapsed"
+                                                            data-toggle="collapse" data-target="#collapseThree"
+                                                            aria-expanded="false">
+                                                            Project: Build a Todo List
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseThree" class="collapse"
+                                                    data-parent="#networkingCollapse">
+                                                    <div class="card-body">
+                                                        <ul>
+                                                            <li>Understand the concept of state in web
+                                                                applications.</li>
+                                                            <li>Learn how to view, create, edit, and delete todo
+                                                                lists.</li>
+                                                            <li>Understand the design of URLs and the role of
+                                                                cookies.</li>
+                                                            <li>Implement flash messages to provide feedback to the
+                                                                user.</li>
+                                                            <li>Understand the concept of validations.</li>
+                                                            <li>Learn how to capture template content for display
+                                                                elsewhere.</li>
+                                                            <li>Implement the ability to mark todos as completed and
+                                                                complete all todos in a list.</li>
+                                                            <li>Use view helpers to apply styles, sort, and filter
+                                                                data.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Securing Applications -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link collapsed"
+                                                            data-toggle="collapse" data-target="#collapseFour"
+                                                            aria-expanded="false">
+                                                            Securing Applications
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseFour" class="collapse"
+                                                    data-parent="#networkingCollapse">
+                                                    <div class="card-body">
+                                                        <ul>
+                                                            <li>Understand the concept of sanitizing HTML and why
+                                                                it's important.</li>
+                                                            <li>Learn how to handle bad input from users.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Adding JavaScript -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link collapsed"
+                                                            data-toggle="collapse" data-target="#collapseFive"
+                                                            aria-expanded="false">
+                                                            Adding JavaScript
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseFive" class="collapse"
+                                                    data-parent="#networkingCollapse">
+                                                    <div class="card-body">
+                                                        <ul>
+                                                            <li>Learn how to include JavaScript files in your web
+                                                                application.</li>
+                                                            <li>Implement a feature to confirm destructive actions
+                                                                using JavaScript.</li>
+                                                            <li>Practice making HTTP requests from JavaScript.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Database Foundations -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse"
+                                                data-target="#dbFoundationsCollapse" aria-expanded="true">
+                                                Database Foundations
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="dbFoundationsCollapse" class="collapse"
+                                        data-parent="#backendCollapse">
+                                        <div class="card-body">
+                                            <!-- Schema, Data and SQL -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link" data-toggle="collapse"
+                                                            data-target="#collapseSix" aria-expanded="true">
+                                                            Schema, Data and SQL
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseSix" class="collapse"
+                                                    data-parent="#dbFoundationsCollapse">
+                                                    <div class="card-body">
+                                                        <ul>
+                                                            <li>The SQL Language</li>
+                                                            <li>PostgreSQL Data Types</li>
+                                                            <li>Working with a Single Table</li>
+                                                            <li>Loading Database Dumps</li>
+                                                            <li>More Single Table Queries</li>
+                                                            <li>NOT NULL and Default Values</li>
+                                                            <li>More Constraints</li>
+                                                            <li>Using Keys</li>
+                                                            <li>GROUP BY and Aggregate Functions</li>
+                                                            <li>How PostgreSQL Executes Queries</li>
+                                                            <li>Table and Column Aliases</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Relational Data and JOINs -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link collapsed"
+                                                            data-toggle="collapse" data-target="#collapseSeven"
+                                                            aria-expanded="false">
+                                                            Relational Data and JOINs
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseSeven" class="collapse"
+                                                    data-parent="#dbFoundationsCollapse">
+                                                    <div class="card-body">
+                                                        <ul>
+                                                            <li>What is Relational Data?</li>
+                                                            <li>Database Diagrams: Levels of Schema</li>
+                                                            <li>Database Diagrams: Cardinality and Modality</li>
+                                                            <li>A Review of JOINs</li>
+                                                            <li>Working with Multiple Tables</li>
+                                                            <li>Foreign Keys</li>
+                                                            <li>One to Many Relationships</li>
+                                                            <li>Extracting a 1:M Relationship From Existing Data</li>
+                                                            <li>Many to Many Relationships</li>
+                                                            <li>Converting a 1:M Relationship to a M:M Relationship</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Database Applications -->
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5 class="mb-0">
+                                            <button class="btn btn-link" data-toggle="collapse"
+                                                data-target="#dbApplicationsCollapse" aria-expanded="true">
+                                                Database Applications
+                                            </button>
+                                        </h5>
+                                    </div>
+                                    <div id="dbApplicationsCollapse" class="collapse"
+                                        data-parent="#backendCollapse">
+                                        <div class="card-body">
+                                            <!-- Interacting with a Database in Code -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link" data-toggle="collapse"
+                                                            data-target="#collapseEight" aria-expanded="true">
+                                                            Interacting with a Database in Code
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseEight" class="collapse"
+                                                    data-parent="#dbApplicationsCollapse">
+                                                    <div class="card-body">
+                                                        <ul>
+                                                            <li>Getting Started</li>
+                                                            <li>Executing SQL Statements from Ruby</li>
+                                                            <li>Project Demo</li>
+                                                            <li>Project Setup</li>
+                                                            <li>Database Design</li>
+                                                            <li>Listing Expenses</li>
+                                                            <li>Displaying Help</li>
+                                                            <li>Adding Expenses</li>
+                                                            <li>Handling Parameters Safely</li>
+                                                            <li>Code Structure</li>
+                                                            <li>Searching Expenses</li>
+                                                            <li>Deleting Expenses</li>
+                                                            <li>Clearing Expenses</li>
+                                                            <li>Counting and Totaling Expenses</li>
+                                                            <li>Creating the Schema Automatically</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Database-backed Web Applications -->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link collapsed"
+                                                            data-toggle="collapse" data-target="#collapseNine"
+                                                            aria-expanded="false">
+                                                            Database-backed Web Applications
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="collapseNine" class="collapse"
+                                                    data-parent="#dbApplicationsCollapse">
+                                                    <div class="card-body">
+                                                        <ul>
+                                                            <li>Getting Started</li>
+                                                            <li>Project Overview</li>
+                                                            <li>Extracting Session Manipulation Code</li>
+                                                            <li>Designing a Schema</li>
+                                                            <li>Setting up a Database Connection</li>
+                                                            <li>Executing and Logging Database Queries</li>
+                                                            <li>Loading Records From the Database</li>
+                                                            <li>Solving the Reloading Problem</li>
+                                                            <li>Development Configuration</li>
+                                                            <li>Working with Lists</li>
+                                                            <li>Working with Todos</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="content" class="col-lg-9 col-md-8 content">
+                <!-- Add the content of each section here -->
+                <!-- You can place the course details, lessons, and assignments in this section -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+
+        function renderPage(url) {
+          $.ajax({
+            url: url,
+            method: 'GET',
+            success: function (data) {
+              const contentDiv = $('#content');
+              contentDiv.html(data);
+
+              const scriptTags = contentDiv.find('script');
+              scriptTags.each(function () {
+                if (this.src) {
+                  $.getScript(this.src);
+                }
+              });
+            },
+            error: function () {
+              console.log('Failed to load the content');
+            }
+          });
+        }
+
+
+    </script>
+</body>
+
+</html>

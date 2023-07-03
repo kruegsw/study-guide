@@ -1,0 +1,19 @@
+<%
+@markdown_text = <<~TEXT
+require 'sinatra'
+
+set :bind, '0.0.0.0'  # This line is new!
+
+BLOG_POSTS = [
+  { id: 1, title: 'First post', body: 'This is my first post.' },
+  { id: 2, title: 'Second post', body: 'This is my second post.' },
+]
+
+get '/' do
+  @posts = BLOG_POSTS
+  erb :index
+end
+TEXT
+%>
+
+<pre class="line-numbers"><code class="language-ruby"><%= @markdown_text %></code></pre>

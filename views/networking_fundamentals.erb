@@ -1,0 +1,24 @@
+<% networking_fundamentals_server = erb :networking_fundamentals_server %>
+<% networking_fundamentals_server_accordion = erb :template_modular_accordian,
+	locals: {
+		button: "What is a server?",
+		heading: "What is a server?",
+		content: "<p>A server is a computer or system that provides resources, data, services, or programs to other computers, known as clients, over a network. In the client-server architecture, servers host and deliver information or services across a network, either to the public, private organizations, or both. They can be dedicated, meaning they perform no other tasks besides their server tasks, or they may be used for other purposes.</p>
+
+			<p>Servers have been categorized below to demonstrate the progression of development complexity, the level of abstraction employed, and the availability of features.</p>
+
+			<p>Most modern web development is done at the fourth and fifth levels of abstraction. While it's possible to work at lower levels -- and it can be a useful learning experience -- it's often not practical due to the increased complexity and the availability of higher-level tools that can handle these tasks more efficiently and reliably.</p>
+
+			<p>We will focus on the third and fourth levels of abstraction to explore how servers work.</p>",
+		nested: networking_fundamentals_server
+	}
+%>
+
+<%= networking_fundamentals = erb :template_modular_accordian,
+		locals: {
+			button: "Networking Fundamentals",
+			heading: "Networking Fundamentals",
+			content: "Computer networking is the practice of connecting computers and other devices to share resources and information. It involves the design, implementation, and management of networks that enable communication between devices across local and wide areas. Networking allows individuals and organizations to access the internet, share data, collaborate, and communicate efficiently.",
+			nested: networking_fundamentals_server_accordion
+		}
+%>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Markdown Example</title>
+
+  <!-- Include Bootstrap CSS for base styling -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+  <!-- Include Prism CSS for syntax highlighting -->
+  <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+
+  <!-- Include Prism JS for syntax highlighting -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://unpkg.com/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://unpkg.com/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+  <script src="https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <pre class="pre-tag p-3 bg-light rounded shadow-sm">
+      <!-- Code block with syntax highlighting -->
+      <code class="code-block language-ruby">
+          require 'sinatra'
+
+          set :bind, '0.0.0.0'  # This line is new!
+
+          BLOG_POSTS = [
+            { id: 1, title: 'First post', body: 'This is my first post.' },
+            { id: 2, title: 'Second post', body: 'This is my second post.' },
+          ]
+
+          get '/' do
+            @posts = BLOG_POSTS
+            erb :index
+          end
+      </code>
+    </pre>
+  </div>
+  <script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+      const codeBlock = document.querySelector('.code-block');
+      const preTag = document.querySelector('.pre-tag');
+      const language = codeBlock.classList[1].split('-')[1];
+      const languageLabel = document.createElement('span');
+      languageLabel.className = 'language-label';
+      languageLabel.innerText = language;
+      preTag.prepend(languageLabel);
+    });
+  </script>
+</body>
+</html>

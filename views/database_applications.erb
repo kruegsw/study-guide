@@ -1,0 +1,17 @@
+<% database_applications_example_sinatra_book_app = erb :template_modular_accordian,
+	locals: {
+		button: "Sinatra Book App",
+		heading: "Sinatra Book App",
+		content: '<a href="/book">Link to Example</a>',
+		nested: ""
+	}
+%>
+
+<%= database_applications = erb :template_modular_accordian,
+		locals: {
+			button: "Database Applications",
+			heading: "Database Applications",
+			content: "tbd",
+			nested: database_applications_example_sinatra_book_app
+		}
+%>

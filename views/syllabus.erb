@@ -1,0 +1,692 @@
+<%= body = <<-HTML
+<pre>
+Programming Foundations with Ruby: Basics
+
+	Major Topics
+
+	    Ruby language and syntax
+	    When to use certain data structures
+	    Using Pseudo-code and Flowcharts for problem decomposition and analysis
+	    Use a static code analyzer
+	    Learn to debug small programs
+	    Understand variable scope
+	    Understand method arguments
+
+	Start with Small Programs
+
+	    Ruby style
+	    Build a calculator
+	    Think with pseudo-code
+	    Use flow charts to map out logical sequence
+	    Use Rubocop to enforce styles
+	    Refactoring our calculator program
+	    Debugging
+	    Extra features for the calculator program
+	    How to write better code
+	    Reference vs value
+	    Build a Rock-Paper-Scissors game
+	    RPS game bonus features
+
+	Exercises
+
+	    Exercise set: Easy 1
+	    Exercise set: Easy 2
+	    Exercise set: Easy 3
+	    Exercise set: Medium 1
+	    Exercise set: Medium 2
+	    Exercise set: Medium 3
+	    Exercise set: Hard
+
+Programming Foundations with Ruby: Intermiediate
+
+	Major Topics
+
+	    Ruby data structures and when to use them: strings, arrays, and hash tables
+	    Iteration in Ruby: #each, #map, #select, and more
+	    Debugging larger programs with pry
+	    The PEDAC process for problem solving
+	    Nested data structures
+	    Working with blocks
+
+	Problem Solving
+
+	    The PEDAC Problem Solving Process
+	    Debugging With Pry
+
+	Data Structures and Collections
+
+	    Strings, Arrays, and Hash Tables
+	    Nested Data Structures
+
+	Iteration
+
+	    Working With Blocks
+	    Looping
+	    Selection and Transformation
+	    Other Iterative Methods
+	    Sorting
+
+	Slightly Larger Programs
+
+	    Rubocop configuration
+	    Decomposition of bigger problems
+	    Build a Tic Tac Toe game
+	    TTT game bonus features
+	    Build a Twenty-One game
+	    Twenty-One game bonus features
+
+Object Oriented Programming
+
+	Major Topics
+
+	    What classes and objects are
+	    How class inheritance works in Ruby
+	    How Ruby deals with multiple inheritance
+	    Class vs instance methods and variables
+	    Working with object oriented code
+	    Design considerations when working with OOP
+	    Object "truthiness"
+	    Object equivalence
+	    Fake operators in Ruby
+	    Debugging OO code
+	    Reading OO code
+	    Working with collaborator objects
+	    Modules
+	    Using CRC cards to guide design
+	    Over a dozen OO exercises
+	    Five large OO projects
+
+	Object Oriented Programming
+
+	    Classes and objects
+	    Inheritance
+	    Collaborator objects
+	    Modules
+	    Build an object oriented RPS game
+	    Coding tips
+	    CRC cards
+	    RPS bonus features
+
+	Working with Objects in Ruby
+
+	    Truthiness and equivalence
+	    Variable scopes
+	    Inheritance and variable scope
+	    Fake operators
+	    Using core libraries as a guide
+	    Command vs query
+	    Monkey patching
+	    Struct
+	    Namespacing
+
+	Exercises
+
+	    Exercise set: Easy 1
+	    Exercise set: Easy 2
+	    Exercise set: Easy 3
+	    Exercise set: Medium
+	    Exercise set: Hard
+
+	Slightly Larger Object Oriented Programs
+
+	    Build an objected oriented Tic Tac Toe game
+	    Step by step planning and execution of the program
+	    Evaluating code and making improvements
+	    A small taste of software design and patterns
+	    TTT bonus features
+	    Build an object oriented Twenty-One game
+	    Spike and overall program structure
+
+Ruby Foundations: More Topics
+
+	Blocks
+
+	    Closures in Ruby
+	    Calling methods with blocks
+	    Writing methods that take blocks
+	    Build a "times" method from scratch
+	    Build an "each" method from scratch
+	    Build an "select" method from scratch
+	    Build an "reduce" method from scratch
+	    Build a todo list
+	    Blocks and variable scope
+	    symbol to proc
+
+	Introduction to Testing
+
+	    Setting up Minitest
+	    Introduction to Minitest
+	    Assertions and refutations
+	    The general approach for testing
+	    Testing equality
+	    Write your first test suite
+	    Code and test coverage
+
+Networking Foundations
+
+	The Internet
+
+	    Network infrastructure
+	    Characteristics of the physical network
+	    Network conceptual models
+	    Data transfer
+	    IP addresses and DNS
+
+	TCP and UDP
+
+	    Multiplexing and demultiplexing
+	    Ports and sockets
+	    Network Reliability
+	    Characteristics of TCP
+	    Characteristics of UDPP
+
+	The HTTP Protocol
+
+	    Understanding the HTTP Protocol
+	    URLs
+	    Using Telnet to explore HTTP
+	    The request / response cycle
+
+	Security
+
+	    Securing applications
+	    TLS Encryption
+	    TLS Authentication
+	    TLS Integrity
+
+Networking Applications
+
+	Handling HTTP Requests
+
+		Understand what an echo server is and how to create one.
+		Practice parsing paths and parameters from HTTP requests.
+		Learn how to send a complete HTTP response, including headers and body.
+		Understand how to handle empty HTTP requests.
+		Practice persisting state in the URL.
+
+	Project: Build a Book Reading App
+
+		Learn how routes work in a web framework.
+		Practice rendering templates.
+		Understand the purpose of a layout and how it can reduce duplication in your templates.
+		Learn how to work with route parameters and filters.
+		Understand the concept of view helpers and their uses.
+		Practice redirecting users from one page to another.
+		Implement a search form.
+
+	Project: Build a Todo List
+
+		Understand the concept of state in web applications.
+		Learn how to view, create, edit, and delete todo lists.
+		Understand the design of URLs and the role of cookies.
+		Implement flash messages to provide feedback to the user.
+		Understand the concept of validations.
+		Learn how to capture template content for display elsewhere.
+		Implement the ability to mark todos as completed and complete all todos in a list.
+		Use view helpers to apply styles, sort, and filter data.
+
+	Securing Applications
+
+		Understand the concept of sanitizing HTML and why it's important.
+		Learn how to handle bad input from users.
+
+	Adding JavaScript
+
+		Learn how to include JavaScript files in your web application.
+		Implement a feature to confirm destructive actions using JavaScript.
+		Practice making HTTP requests from JavaScript.
+
+Database Foundations
+
+	Schema, Data and SQL
+
+		The SQL Language
+		PostgreSQL Data Types
+		Working with a Single Table
+		Loading Database Dumps
+		More Single Table Queries
+		NOT NULL and Default Values
+		More Constraints
+		Using Keys
+		GROUP BY and Aggregate Functions
+		How PostgreSQL Executes Queries
+		Table and Column Aliases
+
+	Relational Data and JOINs
+
+		What is Relational Data?
+		Database Diagrams: Levels of Schema
+		Database Diagrams: Cardinality and Modality
+		A Review of JOINs
+		Working with Multiple Tables
+		Foreign Keys
+		One to Many Relationships
+		Extracting a 1:M Relationship From Existing Data
+		Many to Many Relationships
+		Converting a 1:M Relationship to a M:M Relationship
+
+Database Applications
+
+	Interacting with a Database in Code
+
+		Getting Started
+		Executing SQL Statements from Ruby
+		Project Demo
+		Project Setup
+		Database Design
+		Listing Expenses
+		Displaying Help
+		Adding Expenses
+		Handling Parameters Safely
+		Code Structure
+		Searching Expenses
+		Deleting Expenses
+		Clearing Expenses
+		Counting and Totaling Expenses
+		Creating the Schema Automatically
+
+	Database-backed Web Applications
+
+		Getting Started
+		Project Overview
+		Extracting Session Manipulation Code
+		Designing a Schema
+		Setting up a Database Connection
+		Executing and Logging Database Queries
+		Loading Records From the Database
+		Solving the Reloading Problem
+		Development Configuration
+		Working with Lists
+		Working with Todos
+
+HTML and CSS
+
+	Your First Web Pages
+
+	    Install Software
+	    Getting Started
+	    Creating an HTML Skeleton
+	    Classes, IDs, and Names
+	    Practice Problems: Semantics
+	    Walkthrough Project: A Simple Web Page
+	    Walkthrough Project: Adding Style to Your Web Page
+	    Guided Project: A Personal Profile
+	    Practice Problems: Text Formatting
+	    On Your Own: Creating a Simple Page
+	    Practice Problems: CSS Selectors
+	    Using the Chrome Inspector
+	    HTML and CSS Style Guide
+
+	The Box Model
+
+	    Everything is a box
+	    The Visual Formatting Model
+	    Box Sizing
+	    Practice Problems: The Box Model
+	    Padding and Margins
+	    Measurement Units
+	    Practice Problems: Spacing and Lengths
+
+	Images
+
+	    Image Types
+	    Adding Images to Web Pages
+	    Practice Problems: Images and Figures
+	    Guided Project: A Simple Photo Gallery
+
+	Lists and Tables
+
+	    Lists Overview
+	    Practice Problems: Lists
+	    Tables Overview
+	    Practice Problems: Tables
+	    On Your Own: Nutrition Facts Label
+
+	Forms
+
+	    Forms Overview
+	    Input Types
+	    Input Attributes
+	    Select and Textarea
+	    Form Layouts
+	    Practice Problems: Forms
+	    Walkthrough Project: Contact Form
+	    Guided Project: Tweaking the Contact Form
+
+	Advanced Layout
+
+	    Floats
+	    Containing Floats
+	    Practice Problems: Floats
+	    Positioning
+	    Practice Problems: Positioning
+	    On your Own: Floats and Positioning
+	    Flex and Grid
+	    Guided Project: Flex
+	    Guided Project: Grid
+	    CSS frameworks
+	    Responsive Design
+	    On Your Own: Liquid Photo Gallery
+	    Guided Project: Photo Gallery with Media Queries
+
+	Design Files
+
+	    CSS Resets
+	    Working With Design Files
+	    Walkthrough: Using A Photoshop Design File
+	    On Your Own: Using a PNG Design File
+	    On Your Own: A Company Splash Page
+	    Improving Your HTML and CSS
+	    On Your Own: Company Site
+	    On Your Own: Web Store Catalog
+
+Fundamentals of JavaScript for Programmers
+
+	Major Topics
+
+    Language grammar, syntax and data types
+    Functions and higher-order functions
+    Arrays and Objects as data structures
+    Core built-in methods
+    Writing idiomatic and stylistic code
+
+
+	JavaScript Basics
+
+	    JavaScript Versions
+	    Resources
+	    Running Your Code
+	    Code Style
+	    Data Types
+	    Strings
+	    Primitive Values
+	    Variables
+	    Operators
+	    Expressions and Statements
+	    Exercises: Variables and Numbers
+	    Type Coercions
+	    Conditionals
+	    Input and Output
+	    Looping and Iteration
+
+	Functions and Variable Scope
+
+	    Defining Functions
+	    Function Invocations and Arguments
+	    Exercises: Functions
+	    Nested Functions
+	    Function Scopes and Lexical Scoping
+	    Hoisting
+	    Function Declarations and Function Expressions
+	    Exercises: Variable Scopes in JavaScript (1)
+	    Exercises: Variable Scopes in JavaScript (2)
+
+	Exercises: Logics and Procedural Thinking
+
+	    Chrome Developer Tools
+	    Odd Numbers
+	    Multiples of 3 and 5
+	    Print Multiples
+	    FizzBuzz
+	    Prime Check
+	    XOR
+	    Guessing the Password
+	    Student Grade
+	    Greatest Common Divisor
+	    Goldbach Numbers
+	    Pattern Generation
+	    Index of Substring
+	    Trimming Empty Spaces
+	    Splitting a String
+	    Repeating Strings
+	    String StartsWith
+	    Converting Strings to Lower Case
+	    Substring (1)
+	    Substring (2)
+
+	Arrays
+
+	    Arrays
+	    Exercises: Arrays
+	    Array Operations: push, pop, shift, and unshift
+	    Array Operations: indexOf and lastIndexOf
+	    Array Operations: slice, splice, concat, and join
+	    Array Methods
+	    Arrays and Operators
+	    Exercise: Comparing Arrays
+	    Exercises: Basic Array Uses
+	    Exercises: Intermediate Array Uses
+	    Exercise: Find Missing Numbers
+
+	Objects
+
+	    Introduction to Objects
+	    Object Properties
+	    Stepping through Object Properties
+	    Exercises: Working with Object Properties
+	    Arrays and Objects
+	    Mutability of Values and Objects
+	    Pure Functions and Side Effects
+	    Working with the Math Object
+	    Working with Dates
+	    Working with the Function Argument Object
+	    Exercise: Welcome Stranger
+	    Exercise: Repeated Characters
+
+	Writing Better Code
+
+	    The History and Evolution of the JavaScript Language
+	    JavaScript the Good Parts
+	    JavaScript Style Guide
+
+Computational Thinking and Problem Solving
+
+	Major Topics
+
+    Understand the problem to be solved, and build a mental model that can solve the problem abstractly
+    Implement the model and code it in a formal programming language
+    Thinking logically: analyzing the problem and solutions paths, the center and edge cases
+    Thinking procedurally and the bottom up, imperative solution expressions
+    Thinking abstractly and the top down, declarative solution expressions
+    Common problem-solving patterns
+
+
+	List Processing and Functional Abstractions
+
+	    Passing Function as Arguments
+	    Declarative Programming with Abstractions
+	    List Processing Patterns and Abstractions
+	    Iteration
+	    Filtering / Selection
+	    Transformation
+	    Reducing / Folding
+	    Interrogation
+	    Combining Abstractions
+	    Exercise: Total Square Area
+	    Exercise: Processing Releases
+	    Exercise: Octal
+	    Exercise: Anagrams
+	    Exercise: Formatting Bands
+	    Don't Be Afraid to Use Low Level Abstractions
+	    You've Already Known Some Functional Programming
+
+	String and Text Processing
+
+	    String Processing Patterns
+	    String Methods
+	    Exercises: Strings
+	    Regular Expressions
+	    Reverse a String
+	    Acronym
+	    Email Validation
+	    Matching Parentheses
+	    Sentiment Analysis 1
+	    Sentiment Analysis 2
+	    Longest Sentence
+
+	A General Problem Solving Approach
+
+	    The "PEDAC" Problem Solving Process
+	    Understanding the Problem and Writing Test Cases
+	    An Example Problem: Comparing Version Numbers
+	    Understand the Problem and Requirements (1)
+	    Understand the Problem and Requirements (2)
+	    FAQ on the First Two Steps of the PEDAC Process
+	    Create Examples / Test Cases
+	    Work with Data Structure and Algorithm
+	    Translate Algorithm Steps Into Code
+	    Run Test Cases To Verify and Debug Code
+	    Watch Others Code Series
+	    Practice Problems
+
+Object Oriented Javascript
+
+	Objects
+
+	    Object and Methods
+	    Walkthrough: Object Methods
+	    Practice Problems: Objects
+	    Mutating Objects
+	    Practice Problems: Mutating Objects
+	    Functions as Object Factories
+	    Practice Problems: Functions as Object Factories
+	    Object Orientation
+	    Practice Problems: Object Orientation
+
+	Function Contexts and Objects
+
+	    The Global Object
+	    Practice Problems: The Global Object
+	    Implicit and Explicit Function Execution Contexts
+	    Practice Problems: Implicit and Explicit Function Execution Contexts
+	    Hard Binding Function Execution Contexts
+	    Example: Changing Function Context
+	    Practice Problems: Hard Binding Functions with Contexts
+	    Dealing with Context Loss (1)
+	    Dealing with Context Loss (2)
+	    Dealing with Context Loss (3)
+	    Practice Problems: Dealing with Context Loss
+	    Summary: The “this” Keyword in JavaScript
+	    Practice Problems: What is this (1)
+	    Practice Problems: What is this (2)
+
+	Closures and Function Scope
+
+	    Closures and Function Review
+	    Higher-Order Functions
+	    Practice Problems: Higher-Order Functions
+	    Closures and Private Data
+	    Practice Problems: Closures
+	    Objects and Closures
+	    Project: Banking with Objects and Closures
+	    Garbage Collection
+	    How Closures Affect Garbage Collection
+	    Practice Problems: Garbage Collection
+	    Partial Function Application
+	    Practice Problems: Partial Function Application
+	    Immediately Invoked Function Expressions
+	    Creating a Private Scope with an IIFE
+	    Practice Problems: IIFEs
+
+	Object Creation Patterns
+
+	    Factory Functions
+	    Practice Problems: Create Objects with Factory Functions
+	    Constructor Functions
+	    Objects and Prototypes
+	    Prototypal Inheritance and Behavior Delegation
+	    Practice Problems: Prototypes and Prototypal Inheritance
+	    Constructors and Prototypes
+	    Practice Problems: Constructor Functions and Prototypes (1)
+	    Practice Problems: Constructor Functions and Prototypes (2)
+	    The Pseudo-classical Pattern and the OLOO Pattern
+	    Assignment: Object Constructor Inheritance
+	    More Methods on the Object Constructor
+	    Douglas Crockford Lecture: JavaScript the Good Parts
+
+DOM and Asynchronous Programming with Javascript
+
+	The DOM
+
+	    The Document Object Model (DOM)
+	    A Hierarchy of Nodes
+	    Node Properties
+	    Determining the Type of a Node
+	    Inheritance and Finding Documentation
+	    Traversing Nodes
+	    Element Attributes
+	    Practice Problems: Traversing and Accessing Attributes
+	    Finding DOM Nodes
+	    Traversing Elements
+	    Practice Problems: Finding Nodes and Traversing Elements
+	    Creating and Moving DOM Nodes
+	    The Browser Object Model (BOM)
+	    Practice Problems: The DOM
+	    Assignment: DOM Shuffling
+
+	Event-Driven and Asynchronous Programming
+
+	    Asynchronous Execution with setTimeout
+	    Repeating Execution with setInterval
+	    User Interfaces and Events
+	    A Simple Example
+	    Page Lifecycle Events
+	    User Events
+	    Adding Event Listeners
+	    The Event Object
+	    Capturing and Bubbling
+	    Preventing Propagation and Default Behaviors
+	    Event Delegation
+	    What is the Event Loop?
+	    Assignment: Guessing Game
+	    Assignment: Build an Input Box
+	    Douglas Crockford: An Inconvenient API
+
+	Making HTTP Requests from JavaScript
+
+	    HTTP Review
+	    Book: Working with Web APIs
+	    Network Programming in JavaScript
+	    Making a Request with XMLHttpRequest
+	    XMLHttpRequest Events
+	    Data Serialization
+	    Example: Loading HTML via XHR
+	    Example: Submitting a Form via XHR
+	    Example: Loading JSON via XHR
+	    Example: Sending JSON via XHR
+	    Cross-Domain XMLHttpRequests with CORS
+	    Project: Search Autocomplete, Part 1 - Introduction and Setup
+	    Project: Search Autocomplete, Part 2 - Setting up the UI
+	    Project: Search Autocomplete, Part 3 - Talking to the server
+	    Project: Search Autocomplete, Part 4 - Improving User Experience
+	    Project: Search Autocomplete, Part 5 - Throttling XHR requests
+
+	JavaScript Libraries
+
+	    Douglas Crockford Lecture: The Metamorphosis of Ajax
+	    Reading Documentation
+	    jQuery
+	    Read: jQuery DOM Traversal
+	    Practice Problems: Using jQuery Selectors
+	    Read: jQuery Events
+	    Practice Problems: jQuery Events
+	    HTML Templating With JavaScript
+	    Practice Problems: Handlebars Basics
+	    Assignment: Managing Collections in JavaScript with Handlebars
+	    AJAX Requests
+
+	Putting it All Together
+
+	    Chrome Debugging Tools for Front End Development
+	    HTML Data Attributes
+	    Assignment: Arithmetic Calculator
+	    Assignment: Grocery List
+	    Project: Guess a Word, Part 1: Core Functions
+	    Project: Guess a Word, Part 2: Event Handling and Game Play
+	    Project: Photo Gallery - Introduction and Server Setup
+	    Project: Photo Gallery, Part 1 - Fetch Data and Render on Page Load
+	    Project: Photo Gallery, Part 2 - Slide Show
+	    Project: Photo Gallery, Part 3 - Like, Favorite and Comment
+</pre>
+HTML
+%>

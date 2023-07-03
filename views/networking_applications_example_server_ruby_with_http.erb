@@ -1,0 +1,180 @@
+<div>
+	<p>The previous example was a basic TCP echo server that can accept and respond to raw TCP requests. If you send an HTTP request to the server, the server will not understand because HTTP is a protocol layered on top of TCP.</p>
+	<p>Here's a simple way to modify your server to respond to HTTP GET requests:</p>
+
+  <%
+  markdown_text = <<~TEXT
+  # frozen_string_literal: true
+
+  require 'socket'
+
+  def parse_request(request_line)
+    method, path, version = request_line.split(" ")
+    { method: method, path: path, version: version }
+  end
+
+  server = TCPServer.new('localhost', 1234)
+  puts('Echo server listening on port 1234...')
+
+  loop do
+    Thread.start(server.accept) do |client|
+      request_line = client.gets
+      request = parse_request(request_line)
+
+      if request[:method] == 'GET'
+        client.puts "HTTP/1.1 200 OK\\r\\n\\r\\n"
+        client.puts "Hello, world! You've requested \#{request[:path]}"
+      else
+        client.puts "HTTP/1.1 405 Method Not Allowed\\r\\n\\r\\n"
+      end
+
+      client.close
+    end
+  end
+  TEXT
+  %>
+  <pre><code class="language-ruby"><%= markdown_text %></code></pre>
+
+  <p>Open a terminal and start the server.</p>
+
+  <%
+  markdown_text = <<~TEXT.chomp
+  ruby server.rb 
+  Echo server listening on port 1234...
+  TEXT
+  %>
+  <pre class="command-line" data-user="user" data-host="localhost" data-output="2"><code class="language-command-line"><%= markdown_text %></code></pre>
+
+  <p>Now connect to the server with telnet and issue a GET request.</p>
+
+  <%
+  markdown_text = <<~TEXT.chomp
+  telnet localhost 1234
+  Trying 127.0.0.1...
+  Connected to localhost.
+  Escape character is '^]'.
+  GET /test HTTP/1.1
+  HTTP/1.1 200 OK
+
+  Hello, world! You've requested /test
+  Connection closed by foreign host.
+  TEXT
+  %>
+  <pre class="command-line" data-user="user" data-host="localhost" data-output="2-4, 6-9" data-line="5"><code class="language-command-line"><%= markdown_text %></code></pre>
+
+  <p>You can also send an HTTP from your browser.  Open the client (browser) and type in the URL <code>http://localhost:1234</code> then press enter.  The server will send a blank page with the text "Hello, world! You've requested /"</p>
+
+  <p>Now try the URL <code>http://localhost:1234/path/to/resource.html</code> then press enter.  You will see a blank page with the text "Hello, world! You've requested /path/to/resource.html"</p>
+
+  <p>Let's modify the server code so it can serve a resource that is located in the same directory:</p>
+
+  <%
+  markdown_text = <<~TEXT
+  # frozen_string_literal: true
+
+  require 'socket'
+
+  def parse_request(request_line)
+    method, path, version = request_line.split(" ")
+    { method: method, path: path, version: version }
+  end
+
+  server = TCPServer.new('localhost', 1234)
+  puts('Echo server listening on port 1234...')
+
+  loop do
+    Thread.start(server.accept) do |client|
+      request_line = client.gets
+      request = parse_request(request_line)
+
+      if request[:method] == 'GET'
+        client.puts "HTTP/1.1 200 OK\\r\\n\\r\\n"
+        client.puts "Hello, world! You've requested \#{request[:path]}"
+      else
+        client.puts "HTTP/1.1 405 Method Not Allowed\\r\\n\\r\\n"
+      end
+
+      client.close
+    end
+  end
+  TEXT
+  %>
+  <pre><code class="language-ruby"><%= markdown_text %></code></pre>
+
+  <p>Now create or copy a file into the same directory with the name index.html.  Below is an example.</p>
+
+  <%
+  markdown_text = <<~TEXT
+  &lt;!DOCTYPE html>
+  &lt;html lang="en">
+
+  &lt;head>
+      &lt;meta charset="UTF-8">
+      &lt;meta name="viewport" content="width=device-width, initial-scale=1.0">
+      &lt;title>Generic Webpage Title&lt;/title>
+      &lt;style>
+      &lt;/style>
+  &lt;/head>
+  &lt;body>
+      This is text in the body of an html file.
+      &lt;script>
+      &lt;/script>
+  &lt;/body>
+  &lt;/html>
+  TEXT
+  %>
+  <pre><code class="language-html"><%= markdown_text %></code></pre>
+
+  <p>Restart the server and use browser to issue an HTTP request using the GET method (i.e. by typing <code>http://localhost:1234/index.html</code>into the browser and pressing enter).</p>
+
+  <p>You may notice that the path <code>/index.html</code> will find the file but <code>/</code> will not.  This is because the behavior of serving a file like "index.html" when the path is "/" is not a built-in feature of HTTP or web servers in general. It's actually a convention that has been adopted by many web servers, such as Apache or Nginx.</p>
+
+  <p>When these servers receive a request for "/", they will look for a "default" file in the root directory of the website. This file is typically named "index.html" or "index.htm", but the exact name can be configured on the server.</p>
+
+  <p>Here's a very simple way to implement this behavior in your Ruby server:</p>
+
+  <%
+  markdown_text = <<~TEXT
+  # frozen_string_literal: true
+
+  require 'socket'
+
+  def parse_request(request_line)
+    meth, path, version = request_line.split(" ")
+    { method: meth, path: path == '/' ? '/index.html' : path, version: version }
+  end
+
+  server = TCPServer.new('localhost', 1234)
+  puts('Echo server listening on port 1234...')
+
+  loop do
+    Thread.start(server.accept) do |client|
+      request_line = client.gets
+      request = parse_request(request_line)
+
+      if request[:method] == 'GET'
+        filepath = '.' + request[:path] # We're serving files from the current directory
+
+        if File.exist?(filepath)
+          File.open(filepath, "rb") do |file|
+            client.puts "HTTP/1.1 200 OK\\r\\nContent-Type: text/html\\r\\n\\r\\n"
+            IO.copy_stream(file, client)
+          end
+        else
+          client.puts "HTTP/1.1 404 Not Found\\r\\n\\r\\n"
+          client.puts "File not found"
+        end
+      else
+        client.puts "HTTP/1.1 405 Method Not Allowed\\r\\n\\r\\n"
+      end
+
+      client.close
+    end
+  end
+  TEXT
+  %>
+  <pre><code class="language-ruby"><%= markdown_text %></code></pre>
+
+  <p>Now enter <code>/</code> into the browser and the file index.html will load as expected.</p>
+
+</div>

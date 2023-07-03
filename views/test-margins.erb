@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Guide - accessed on <%= @time %> </title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+    </style>
+</head>
+
+<body>
+
+
+<%
+            button = "1.  Assembly and Machine Code"
+            heading = "Assembly and Machine Code"
+            content = "<p>At the very lowest level, servers are just programs that run on a machine, and all programs ultimately get compiled down to machine code that the processor can execute. Similarly, assembly language is a slightly more readable representation of machine code, but it's still very low level and requires understanding the specifics of the processor architecture. For most humans, programming in assembly or machine code is not practical for anything but the simplest tasks.</p>",
+            nested = ""
+        }
+%>
+
+    <div id="content" class="content">
+        <% tier_counter = 1 %>
+<div class="accordion">
+  <div class="card">
+    <div class="card-header" id="heading<%= @tier_counter %>">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<%= @tier_counter %>" aria-expanded="false" aria-controls="collapse<%= @tier_counter %>">
+          <%= button %>
+        </button>
+      </h2>
+    </div>
+
+    <div id="collapse<%= @tier_counter %>" class="collapse" aria-labelledby="heading">
+      <div class="card-body">
+        <h3><%= heading %></h3>
+        <p><%= content %></p>
+
+        <%= nested %>        
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Include Prism CSS for syntax highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+
+    <!-- Include Prism JS for syntax highlighting ... determine later if some of these are unnecessary... -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <!-- <script src="https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script> --> <!-- unnecessary with plugin below -->
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/show-language/prism-show-language.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-ruby.min.js"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<div>
+  <p>A "raw" socket is a type of socket that provides direct access to the underlying network layer, bypassing some of the higher-level protocols and abstractions. With a raw socket, an application can send and receive IP packets directly, giving it more control and flexibility over network communication.</p>
+
+  <ul>
+    <li>
+      <h3>Direct Access:</h3>
+      <p>Raw sockets allow applications to construct and manipulate network packets at a lower level than the typical socket API. They provide access to the IP layer, allowing the application to define the IP header and payload directly.</p>
+    </li>
+    
+    <li>
+      <h3>Protocol Support:</h3>
+      <p>Raw sockets can be used to work with different network protocols, including IPv4 and IPv6. By using raw sockets, an application can handle specific protocols or implement custom protocols that may not be directly supported by the operating system's socket API.</p>
+    </li>
+    
+    <li>
+      <h3>Packet Sniffing and Analysis:</h3>
+      <p>Raw sockets enable packet sniffing and analysis, as applications can receive all incoming packets on a network interface. This capability is often used in network monitoring, security analysis, and packet capture applications.</p>
+    </li>
+    
+    <li>
+      <h3>Network Stacks and Filtering:</h3>
+      <p>Raw sockets allow applications to implement their own network stack or apply custom packet filtering rules. This can be useful in specialized scenarios where fine-grained control over network traffic is required.</p>
+    </li>
+    
+    <li>
+      <h3>Security Considerations:</h3>
+      <p>Due to their lower-level access, raw sockets typically require elevated privileges to create and use. This helps prevent misuse and potential security vulnerabilities associated with direct access to the network layer.</p>
+    </li>
+  </ul>
+
+  <p>Exercise caution when working with raw sockets, as they have lower-level access and can be misused or pose security risks if not handled properly.</p>
+
+  <p>Here's a simplified example of using a raw socket in Ruby to send and receive raw IP packets:</p>
+
+  <%
+  @markdown_TCP = <<~TEXT
+require 'socket'
+
+# Create a raw socket
+raw_socket = Socket.new(Socket::AF_INET, Socket::SOCK_RAW, Socket::IPPROTO_RAW)
+
+# Set the IP header fields
+source_ip = '192.168.0.1'  # Source IP address
+destination_ip = '192.168.0.2'  # Destination IP address
+
+# Construct the IP header
+ip_header = [
+  0x45,     # Version and Internet Header Length (IHL)
+  0x00,     # Type of Service (TOS)
+  0x00, 20, # Total Length
+  0x00, 0x00, # Identification
+  0x00, 0x00, # Flags and Fragment Offset
+  0x40,     # Time to Live (TTL)
+  0x06,     # Protocol (TCP)
+  0x00, 0x00, # Header Checksum
+  source_ip.split('.').map(&:to_i).pack('C*'),       # Source IP address
+  destination_ip.split('.').map(&:to_i).pack('C*')  # Destination IP address
+].join
+
+# Create your payload (e.g., TCP or UDP packet)
+payload = "Hello, world!"
+
+# Send the packet
+raw_socket.send(ip_header + payload, 0, destination_ip)
+
+# Receive incoming packets
+while true
+  packet = raw_socket.recv(65535)
+  puts "Received packet: " + packet
+end
+  TEXT
+  %>
+  <pre><code class="language-ruby"><%= @markdown_TCP %></code></pre>
+
+  <p>In this Ruby example, we create a raw socket using <code class="language-ruby">Socket.new()</code> and specify <code class="language-ruby"></code>AF_INET for IPv4, <code class="language-ruby"></code>SOCK_RAW for raw socket type, and <code class="language-ruby"></code>IPPROTO_RAW for the protocol. We then construct an IP header as a binary string and set the necessary fields such as source IP, destination IP, protocol, etc. Finally, we send the packet using <code class="language-ruby"></code>raw_socket.send.</p>
+
+  <p>the provided example code is not intended to run a server. It demonstrates how to create and use a raw socket to send and receive raw IP packets.</p>
+
+  <p>Running a server typically involves listening for incoming connections, handling client requests, and providing responses. The code provided in the previous example focuses on constructing and sending raw IP packets, as well as receiving incoming packets.</p>
+
+  <p>If you're looking to implement a server, it would require a different approach and involve utilizing higher-level protocols like TCP or UDP, setting up socket binding, and handling client connections and requests.</p>
+</div>

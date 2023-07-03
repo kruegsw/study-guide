@@ -1,0 +1,82 @@
+<div>
+  <p>It is possible to create a simple server using Ruby's standard library, thanks to classes like TCPServer and Socket. Here is a basic example of a server that listens for connections on port 1234 and echoes back anything it receives.</p>
+
+  <p>you can build a server using Ruby with even less abstraction, however this may not be practical in many real-world scenarios. Here's an example using very basic sockets:</p>
+
+  <p>This example directly uses the Socket class to create a socket, bind it to a port, and start listening for connections. It then loops forever, accepting connections, sending a response, and closing the connection.</p>
+
+  <p>While this is lower-level and uses fewer abstractions than the TCPServer example, it's also harder to read and understand for people who aren't familiar with socket programming. For real-world applications, you would typically use higher-level abstractions or a web framework like Sinatra or Ruby on Rails.</p>
+
+  <%
+  @markdown_TCP = <<~TEXT
+  require 'socket'
+
+  socket = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM)
+  addr = Socket.pack_sockaddr_in(1234, 'localhost')
+  socket.bind(addr)
+  socket.listen(128)
+
+  loop do
+    connection, _ = socket.accept
+    connection.write "Hello, client!"
+    connection.close
+  end
+  TEXT
+  %>
+  <pre><code class="language-ruby"><%= @markdown_TCP %></code></pre>
+
+  <p>socket = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM): This line creates a new socket. Socket::AF_INET specifies that the socket should use IPv4. Socket::SOCK_STREAM specifies that the socket should use TCP (a reliable, stream-oriented transport protocol) rather than UDP or another protocol. The newly created socket isn't associated with a network address yet.</p>
+
+  <p>addr = Socket.pack_sockaddr_in(1234, 'localhost'): This line creates a Socket Address structure in a binary format that the low-level socket API can understand. 'localhost' is the host, and '1234' is the port number. The host address 'localhost' is usually used for testing, meaning that the server will only be reachable from the same machine. In a real-world application, you might use a public IP address or a domain name.</p>
+
+  <p>socket.bind(addr): This line associates the newly created socket with the given network address. After this line is executed, the socket is bound to the specified port (1234) on the specified host ('localhost'). This means that when other machines on the network send data to this port and host, the data will be delivered to this socket.</p>
+
+  <p>socket.listen(128): This line makes the socket start listening for incoming connections. The number 128 is the maximum length that the queue of pending connections may grow to. This doesn't mean the server can handle 128 connections simultaneously, but rather that the OS can hold up to 128 connections in a buffer until the server is ready to accept() them.</p>
+
+  <p>The number 128 in the socket.listen(128) line refers to the maximum number of queued connections that the operating system will allow for this socket. This is sometimes referred to as the "backlog". When this limit is reached, the operating system will start refusing new connections until the server has processed some of the connections in the queue.
+
+  The value 128 is a commonly used number, partly for historical reasons and partly because it is generally a reasonable balance between resource usage and the ability to handle bursts of traffic.
+
+  It's worth noting that this doesn't limit the total number of connections that your server can handle, only the number that can be waiting to be accept()ed at any one time. Once a connection is accepted and processing begins (potentially on a separate thread or in a separate process), it no longer counts towards this limit.
+
+  The exact behavior can also vary depending on the operating system's implementation of the socket API. In some systems, the actual backlog may be larger or smaller than the number you provide, depending on system limits and configuration.
+
+  For most purposes, 128 is a good starting point, but for high-performance servers, you might need to adjust this value and perform careful load testing to find the optimal backlog size.</p>
+
+  <%
+  @markdown_UDP = <<~'TEXT'
+  require 'socket'
+
+  socket = UDPSocket.new
+  socket.bind('localhost', 1234)
+
+  loop do
+    text, sender = socket.recvfrom(16)
+    puts "Received " + text + " from " + sender[3]
+    socket.send("Hello, client!", 0, sender[3], sender[1])
+  end
+  TEXT
+  %>
+  <pre><code class="language-ruby"><%= @markdown_UDP %></code></pre>
+
+  <p>In this example:</p>
+
+  <p>socket = UDPSocket.new creates a new UDP socket. Unlike TCP, UDP is a connectionless protocol, so you don't need to listen for connections or accept them.</p>
+
+  <p>socket.bind('localhost', 1234) binds the socket to a specific address and port, like before.</p>
+
+  <p>socket.recvfrom(16) is used to receive data from the socket. 16 is the maximum number of bytes to receive at once. The method returns the data and an array containing information about the sender.</p>
+
+  <p>socket.send("Hello, client!", 0, sender[3], sender[1]) is used to send a response back to the client. The second argument (0) is a set of flags to modify the behavior of send, which we're not using in this case. The third and fourth arguments are the address and port to send the data to.</p>
+
+  <p>Note: This simple UDP server does not handle errors or lost packets, so it's only suitable for simple, low-stakes applications. For more complex applications, you may want to use a higher-level library or a protocol built on top of UDP that provides error handling and other features.</p>
+
+  <p>In the Ruby standard library, the UDPSocket class is already a fairly low-level interface to the system's UDP functionality. If you want to get more low-level than this, you might have to dive into Ruby's C API or use the ffi gem to interact with system libraries directly.</p>
+
+  <p>However, this is typically not recommended unless you have a very specific reason to do so. Lower-level programming comes with added complexity and potential for errors, and Ruby's standard library already provides robust, high-level interfaces to network programming functionality that are more than sufficient for most applications.</p>
+
+  <p>The UDPSocket class provides methods for all of the basic operations you need to perform with a UDP socket, including creating a socket, binding it to a port, sending and receiving data, and closing the socket. There aren't really any higher-level abstractions for UDP in Ruby's standard library, because the protocol itself is quite simple and doesn't have features like connections or streams that could be abstracted.</p>
+
+  <p>If you need less abstraction because you're trying to understand how things work under the hood, you might consider learning C or another low-level language, which will give you more direct access to system APIs and a better understanding of how these high-level Ruby features are implemented.</p>
+
+</div>

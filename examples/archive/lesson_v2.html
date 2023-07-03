@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Guide</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Study Guide</a>
+    </nav>
+
+    <div class="container py-4">
+        <div id="accordion">
+            <!-- Networking Applications -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#networkingCollapse" aria-expanded="true">
+                            Networking Applications
+                        </button>
+                    </h5>
+                </div>
+                <div id="networkingCollapse" class="collapse" data-parent="#accordion">
+                    <div class="card-body">
+                        <!-- Loop through sections -->
+                        <ul>
+                            <!-- Create a JavaScript array to store section information -->
+                            <script>
+                                var sections = [
+                                    {
+                                        title: "Handling HTTP Requests",
+                                        content: [
+                                            "Understand what an echo server is and how to create one.",
+                                            "Practice parsing paths and parameters from HTTP requests.",
+                                            "Learn how to send a complete HTTP response, including headers and body.",
+                                            "Understand how to handle empty HTTP requests.",
+                                            "Practice persisting state in the URL."
+                                        ]
+                                    },
+                                    {
+                                        title: "Project: Build a Book Reading App",
+                                        content: [
+                                            "Learn how routes work in a web framework.",
+                                            "Practice rendering templates.",
+                                            "Understand the purpose of a layout and how it can reduce duplication in your templates.",
+                                            "Learn how to work with route parameters and filters.",
+                                            "Understand the concept of view helpers and their uses.",
+                                            "Practice redirecting users from one page to another.",
+                                            "Implement a search form."
+                                        ]
+                                    },
+                                    {
+                                        title: "Project: Build a Todo List",
+                                        content: [
+                                            "Understand the concept of state in web applications.",
+                                            "Learn how to view, create, edit, and delete todo lists.",
+                                            "Understand the design of URLs and the role of cookies.",
+                                            "Implement flash messages to provide feedback to the user.",
+                                            "Understand the concept of validations.",
+                                            "Learn how to capture template content for display elsewhere.",
+                                            "Implement the ability to mark todos as completed and complete all todos in a list.",
+                                            "Use view helpers to apply styles, sort, and filter data."
+                                        ]
+                                    },
+                                    {
+                                        title: "Securing Applications",
+                                        content: [
+                                            "Understand the concept of sanitizing HTML and why it's important.",
+                                            "Learn how to handle bad input from users."
+                                        ]
+                                    },
+                                    {
+                                        title: "Adding JavaScript",
+                                        content: [
+                                            "Learn how to include JavaScript files in your web application.",
+                                            "Implement a feature to confirm destructive actions using JavaScript.",
+                                            "Practice making HTTP requests from JavaScript."
+                                        ]
+                                    }
+                                ];
+
+                                // Loop through the sections array and generate HTML dynamically
+                                for (var i = 0; i < sections.length; i++) {
+                                    var section = sections[i];
+
+                                    document.write('<div class="card">');
+                                    document.write('<div class="card-header">');
+                                    document.write('<h5 class="mb-0">');
+                                    document.write('<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse' + i + '" aria-expanded="false">');
+                                    document.write(section.title);
+                                    document.write('</button>');
+                                    document.write('</h5>');
+                                    document.write('</div>');
+                                    document.write('<div id="collapse' + i + '" class="collapse" data-parent="#networkingCollapse">');
+                                    document.write('<div class="card-body">');
+                                    document.write('<ul>');
+
+                                    for (var j = 0; j < section.content.length; j++) {
+                                        document.write('<li>' + section.content[j] + '</li>');
+                                    }
+
+                                    document.write('</ul>');
+                                    document.write('</div>');
+                                    document.write('</div>');
+                                    document.write('</div>');
+                                }
+                            </script>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- Database Foundations -->
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#databaseFoundationsCollapse" aria-expanded="false">
+                    Database Foundations
+                  </button>
+                </h5>
+              </div>
+              <div id="databaseFoundationsCollapse" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                  <ul>
+                    <!-- Schema, Data and SQL -->
+                    <li>
+                      <h6>Schema, Data and SQL</h6>
+                      <ul>
+                        <li>The SQL Language</li>
+                        <li>PostgreSQL Data Types</li>
+                        <li>Working with a Single Table</li>
+                        <li>Loading Database Dumps</li>
+                        <li>More Single Table Queries</li>
+                        <li>NOT NULL and Default Values</li>
+                        <li>More Constraints</li>
+                        <li>Using Keys</li>
+                        <li>GROUP BY and Aggregate Functions</li>
+                        <li>How PostgreSQL Executes Queries</li>
+                        <li>Table and Column Aliases</li>
+                      </ul>
+                    </li>
+                    <!-- Relational Data and JOINs -->
+                    <li>
+                      <h6>Relational Data and JOINs</h6>
+                      <ul>
+                        <li>What is Relational Data?</li>
+                        <li>Database Diagrams: Levels of Schema</li>
+                        <li>Database Diagrams: Cardinality and Modality</li>
+                        <li>A Review of JOINs</li>
+                        <li>Working with Multiple Tables</li>
+                        <li>Foreign Keys</li>
+                        <li>One to Many Relationships</li>
+                        <li>Extracting a 1:M Relationship From Existing Data</li>
+                        <li>Many to Many Relationships</li>
+                        <li>Converting a 1:M Relationship to a M:M Relationship</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Database Applications -->
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#databaseApplicationsCollapse" aria-expanded="false">
+                    Database Applications
+                  </button>
+                </h5>
+              </div>
+              <div id="databaseApplicationsCollapse" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                  <ul>
+                    <!-- Interacting with a Database in Code -->
+                    <li>
+                      <h6>Interacting with a Database in Code</h6>
+                      <ul>
+                        <li>Getting Started</li>
+                        <li>Executing SQL Statements from Ruby</li>
+                        <li>Project Demo</li>
+                        <li>Project Setup</li>
+                        <li>Database Design</li>
+                        <li>Listing Expenses</li>
+                        <li>Displaying Help</li>
+                        <li>Adding Expenses</li>
+                        <li>Handling Parameters Safely</li>
+                        <li>Code Structure</li>
+                        <li>Searching Expenses</li>
+                        <li>Deleting Expenses</li>
+                        <li>Clearing Expenses</li>
+                        <li>Counting and Totaling Expenses</li>
+                        <li>Creating the Schema Automatically</li>
+                      </ul>
+                    </li>
+                    <!-- Database-backed Web Applications -->
+                    <li>
+                      <h6>Database-backed Web Applications</h6>
+                      <ul>
+                        <li>Getting Started</li>
+                        <li>Project Overview</li>
+                        <li>Extracting Session Manipulation Code</li>
+                        <li>Designing a Schema</li>
+                        <li>Setting up a Database Connection</li>
+                        <li>Executing and Logging Database Queries</li>
+                        <li>Loading Records From the Database</li>
+                        <li>Solving the Reloading Problem</li>
+                        <li>Development Configuration</li>
+                        <li>Working with Lists</li>
+                        <li>Working with Todos</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+<div>
+	<p>Building an HTTP server from scratch is a significant task that involves a deep understanding of the HTTP protocol and handling various edge cases and exceptions. Here is a simplified example of a basic HTTP server written in Ruby. This server will handle GET and POST requests, including URL-encoded parameters in both the URL and the body of POST requests.</p>
+
+  <p>This code is not production-ready and omits several important features of a complete HTTP server, such as support for HTTPS, handling of other HTTP methods, handling of HTTP headers beyond Content-Length, error handling, and security measures.</p>
+
+  <p>Please use it as a learning tool, not as a foundation for a real HTTP server.</p>
+
+  <%
+  markdown_text = <<~TEXT.chomp
+  require 'socket'
+  require 'uri'
+  require 'cgi'
+
+  class HTTPServer
+    CRLF = "\\r\\n"
+
+    def initialize(port)
+      @server = TCPServer.new(port)
+    end
+
+    def start
+      loop do
+        Thread.start(@server.accept) do |client|
+          handle_request(client)
+          client.close
+        end
+      end
+    end
+
+    private
+
+    def handle_request(client)
+      request_line = client.gets
+      method, full_path, http_version = request_line.split(' ')
+      path, query = full_path.split('?')
+      params = CGI.parse(query.to_s)
+
+      case method
+      when 'GET'
+        handle_get_request(client, path, params)
+      when 'POST'
+        handle_post_request(client, path, params)
+      else
+        client.puts "HTTP/1.1 405 Method Not Allowed\#{CRLF}\#{CRLF}"
+      end
+    end
+
+    def handle_get_request(client, path, params)
+      client.puts "HTTP/1.1 200 OK\#{CRLF}\#{CRLF}"
+      client.puts "You requested path \#{path} with parameters \#{params.inspect}"
+    end
+
+    def handle_post_request(client, path, params)
+      headers = parse_headers(client)
+      body = client.read(headers['Content-Length'].to_i)
+      body_params = CGI.parse(body)
+      params.merge!(body_params)
+
+      client.puts "HTTP/1.1 200 OK\#{CRLF}\#{CRLF}"
+      client.puts "You posted to path \#{path} with parameters \#{params.inspect}"
+    end
+
+    def parse_headers(client)
+      headers = {}
+
+      while (line = client.gets) != CRLF
+        name, value = line.chomp.split(': ', 2)
+        headers[name] = value
+      end
+
+      headers
+    end
+  end
+
+  HTTPServer.new(1234).start
+  TEXT
+  %>
+  <pre><code class="language-ruby"><%= markdown_text %></code></pre>
+
+  <p>However, it's important to note that for complex, real-world servers, it's usually better to use a framework or server software that's been thoroughly tested and optimized for performance and security. Ruby has several popular web frameworks, like Sinatra and Ruby on Rails, that make it easy to build robust and secure servers.</p>
+</div>

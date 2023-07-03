@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Guide - accessed on <%= @time %> </title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        .card-body {
+            padding-right: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Study Guide</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <li><a class="nav-link" href=# onclick="updateContent('syllabus', 'template_content_with_markdown_prism')">Syllabus</a></li>
+                </li>
+                <li class="nav-item">
+                    <li><a class="nav-link" href=# onclick="updateContent('networking', 'template_content_with_markdown_prism')">Networking</a></li>
+                </li>
+                <li class="nav-item">
+                    <li><a class="nav-link" href=# onclick="updateContent('database', 'template_content_with_markdown_prism')">Database</a></li>
+                </li>
+                <li class="nav-item">
+                    <li><a class="nav-link" href=# onclick="updateContent('testing', 'template_content_with_markdown_prism')">Testing</a></li>
+                </li>
+            </ul>
+        </div>
+        
+    </nav>
+
+    <div id="content" class="col-lg-9 col-md-8 content">
+        <!-- Add the content of each section here -->
+        <!-- You can place the course details, lessons, and assignments in this section -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Include Prism CSS for syntax highlighting -->
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet" />
+
+    <!-- Include Prism JS for syntax highlighting ... determine later if some of these are unnecessary... -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/plugins/show-language/prism-show-language.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-ruby.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-clike.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-c.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-erb.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-http.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://unpkg.com/prismjs@1.29.0/components/prism-json.min.js"></script>
+    <script src=""></script>
+
+    <script>
+      function updateContent(viewFileName, layoutTemplate) {
+        $.ajax({
+          url: '/update_content',  // URL to the route that returns the updated content
+          type: 'GET',
+          dataType: 'json',
+          data: { viewFileName: viewFileName, layoutTemplate: layoutTemplate }, // Pass the variables as data to the server
+          success: function(response) {
+            // Update the content element on the page with the received data
+            $('#content').html(response.content);
+          },
+          error: function(xhr, status, error) {
+            console.log('Error:', error);
+          }
+        });
+      }
+    </script>
+    <% def render(filename, locals = {})
+        b = binding
+        locals.each { |k,v| b.local_variable_set(k, v) }
+        ERB.new(File.read(filename)).result(b)
+        end
+    %>
+
+    <%= erb :_scroll_to_top %>
+
+
+</body>
+
+</html>
